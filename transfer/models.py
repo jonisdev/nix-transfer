@@ -1,7 +1,7 @@
 from django.db import models
 from model_utils import Choices
 from datetime import datetime as dt
-
+from django.conf import settings
 
 class Transfer(models.Model):
     # CC = 'CC'
@@ -22,9 +22,11 @@ class Transfer(models.Model):
         ('ERROR', 'Erro'),
     )
 
-    # TODO - Implement custom user
-    user_id = models.IntegerField(
-        verbose_name="ID do Usuário"
+    user_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='User',
+        related_name='transfers',
+        on_delete=models.CASCADE
     )
     paying_name = models.CharField(
         verbose_name="Nome do Pagador",
@@ -108,6 +110,10 @@ class Transfer(models.Model):
         else:
             self.status = self.STATUS_CHOICES.OK
             self.save()
+
+
+from accounts.models import User
+u = User(name='Brazil Exportations HUE BR', cnpj=31415850000508)
 
 
 # from transfer.models import Transfer
