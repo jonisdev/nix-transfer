@@ -1,2 +1,23 @@
-# TODO - write tests for the model
+# OK - customize post, to avoid status and type insertion, using exclude for the serialize class
+# OK - FIX status bug
+
+# TODO - Read about DRF Routes
+# TODO - Put version in api url /api/v1/ (REST Best practice?)
+# TODO - List references
+# TODO - Fix all return codes, for error and OKs
+# TODO - RE write tests for the model
 # TODO - check that awesome project in Olist
+# TODO - fix models str e repr
+# TODO - Maybe show Model information instead the user_id in serializarion
+# TODO - Implement User serialization.
+# TODO - Read about microservices
+# TODO - put some dummy cnpj's in the document.
+
+# TODO - PROJECT REQUISITES
+# - listagem com somatória e total de transferências
+# ---- filtros por data, pagador e beneficiário
+# ---- paginação
+# ---- retornar a somatória e o total
+# listagem por id
+# TODO - Implement logical exclusion
+

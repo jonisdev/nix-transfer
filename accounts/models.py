@@ -47,7 +47,7 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'cnpj'
 
     def __str__(self):
-        return self.name and self.cnpj
+        return self.name or str(self.cnpj)
 
     def __repr__(self):
-        return self.name and self.cnpj
+        return self.name or str(self.cnpj)

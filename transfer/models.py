@@ -5,7 +5,9 @@ from django.conf import settings
 
 
 class Transfer(models.Model):
-
+    MAX_TRANSFER_AMOUNT = 100000.0
+    MIN_TRANSFER_AMOUNT = 0.0
+    MAX_TED_TRANSFER_AMOUNT = 5000.0
     TYPE_CHOICES = Choices(
         ('CC', 'Conta Corrente'),
         ('TED', 'Transfêrencia Eletrônica de Documentos'),
@@ -23,20 +25,20 @@ class Transfer(models.Model):
         related_name='transfers',
         on_delete=models.CASCADE
     )
-    paying_name = models.CharField(
+    payer_name = models.CharField(
         verbose_name="Nome do Pagador",
         max_length=128
 
     )
-    paying_bank = models.CharField(
+    payer_bank = models.CharField(
         verbose_name="Banco do Pagador",
         max_length=3
     )
-    paying_agency = models.CharField(
+    payer_agency = models.CharField(
         verbose_name="Agência do Pagador",
         max_length=4
     )
-    paying_account = models.CharField(
+    payer_account = models.CharField(
         verbose_name="Conta do Pagador",
         max_length=6
     )
@@ -74,7 +76,6 @@ class Transfer(models.Model):
     )
 
     def set_transfer_type(self):
-
         current_datetime = dt.now()
         current_time = dt.time(current_datetime)
         current_date = current_datetime.date()
@@ -83,45 +84,26 @@ class Transfer(models.Model):
         final_ted_time = dt.time(dt(
             current_date.year, current_date.month, current_date.day, 16, 0, 0))
 
-        if self.paying_bank == self.beneficiary_bank:
+        if self.payer_bank == self.beneficiary_bank:
             self.type = self.TYPE_CHOICES.CC
-            self.save()
         elif dt.weekday(current_datetime) in (5, 6):
             self.type = self.TYPE_CHOICES.DOC
-            self.save()
-        elif current_time > initial_ted_time and \
-                current_time < final_ted_time and \
-                self.amount < 5000.0:
+        elif initial_ted_time < current_time < final_ted_time and \
+                self.amount < self.MAX_TED_TRANSFER_AMOUNT:
             self.type = self.TYPE_CHOICES.TED
-            self.save()
         else:
             self.type = self.TYPE_CHOICES.DOC
-            self.save()
 
     def set_transfer_status(self):
-        if self.amount > 100000.0 and self.amount <= 0:
-            self.status = self.STATUS_CHOICES.ERROR
-            self.save()
-        else:
+        if self.MAX_TRANSFER_AMOUNT > self.amount >= self.MIN_TRANSFER_AMOUNT:
             self.status = self.STATUS_CHOICES.OK
-            self.save()
+        else:
+            self.status = self.STATUS_CHOICES.ERROR
 
+    def __repr__(self):
+        return self.payer_name
 
-
-
-
-
-# from transfer.models import Transfer
-# from accounts.models import User
-# u = User(name='Brazil Exportations HUE BR', cnpj=31415850000508)
-# t = Transfer(user_id=u,
-#               paying_name ='Jonatan Vianna da Silva',
-#               paying_bank=1,
-#               paying_agency=3334,
-#               paying_account=188003,
-#               beneficiary_name='Jonatan Vianna da Silva',
-#               beneficiary_bank=1,
-#               beneficiary_agency=3334,
-#               beneficiary_account=188003,
-#               amount=9237651239872.97,
-#               )
+    def save(self, *args, **kwargs):
+        self.set_transfer_type()
+        self.set_transfer_status()
+        super(Transfer, self).save(*args, **kwargs)

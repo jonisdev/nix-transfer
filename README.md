@@ -1,9 +1,12 @@
 https://en.wikipedia.org/wiki/Class_diagram
 https://softwareengineering.stackexchange.com/questions/235313/uml-class-diagram-notations-differences-between-association-aggregation-and-co
 https://django-model-utils.readthedocs.io/en/latest/utilities.html#choices
+https://stackoverflow.com/questions/4269605/django-override-save-for-model
 https://stackoverflow.com/questions/18706098/django-access-given-fields-choices-tuple
 https://github.com/poliquin/brazilnum
 https://pypi.org/project/brazilnum/
 https://docs.djangoproject.com/en/2.0/ref/validators/
+https://docs.djangoproject.com/en/2.0/topics/db/models/
 https://www.linguee.com
 https://docs.python.org/3.6/library/datetime.html
+https://realpython.com/test-driven-development-of-a-django-restful-api/
