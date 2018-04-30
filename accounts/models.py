@@ -48,3 +48,6 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.name and self.cnpj
+
+    def __repr__(self):
+        return self.name and self.cnpj

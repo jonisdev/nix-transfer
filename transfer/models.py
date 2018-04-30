@@ -3,19 +3,14 @@ from model_utils import Choices
 from datetime import datetime as dt
 from django.conf import settings
 
+
 class Transfer(models.Model):
-    # CC = 'CC'
-    # TED = 'TED'
-    # DOC = 'DOC'
 
     TYPE_CHOICES = Choices(
         ('CC', 'Conta Corrente'),
         ('TED', 'Transfêrencia Eletrônica de Documentos'),
         ('DOC', 'Documento de Ordem de Crédito'),
     )
-
-    # OK = 'OK'
-    # ERROR = 'ERROR'
 
     STATUS_CHOICES = Choices(
         ('OK', 'OK'),
@@ -104,7 +99,7 @@ class Transfer(models.Model):
             self.save()
 
     def set_transfer_status(self):
-        if self.amount > 100000.0:
+        if self.amount > 100000.0 and self.amount <= 0:
             self.status = self.STATUS_CHOICES.ERROR
             self.save()
         else:
@@ -112,12 +107,14 @@ class Transfer(models.Model):
             self.save()
 
 
-from accounts.models import User
-u = User(name='Brazil Exportations HUE BR', cnpj=31415850000508)
+
+
 
 
 # from transfer.models import Transfer
-# t = Transfer(user_id=222,
+# from accounts.models import User
+# u = User(name='Brazil Exportations HUE BR', cnpj=31415850000508)
+# t = Transfer(user_id=u,
 #               paying_name ='Jonatan Vianna da Silva',
 #               paying_bank=1,
 #               paying_agency=3334,
