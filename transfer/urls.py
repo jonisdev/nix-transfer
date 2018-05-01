@@ -1,8 +1,13 @@
 from django.urls import path
-from .views import get_post_transfer, ListCreateTransfer
+from .views import RetrieveUpdateDestroyTransfer, ListCreateTransfer
+
 app_name = 'transfers'
 
 urlpatterns = [
-    path('transfers/', ListCreateTransfer.as_view(), name='transfers'),
-    # path('transfers/', CreateTransfer.as_view(), name='create-transfer'),
+    path('api/v1/transfers/', ListCreateTransfer.as_view(),
+         name='get_post_transfers'),
+
+    path('api/v1/transfers/<int:pk>',
+         RetrieveUpdateDestroyTransfer.as_view(),
+         name='get_put_delete_transfers'),
 ]

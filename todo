@@ -3,7 +3,7 @@
 
 # TODO - Read about DRF Routes
 # TODO - Put version in api url /api/v1/ (REST Best practice?)
-# TODO - List references
+# TODO - List site references
 # TODO - Fix all return codes, for error and OKs
 # TODO - RE write tests for the model
 # TODO - check that awesome project in Olist

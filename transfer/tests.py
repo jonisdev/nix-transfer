@@ -1,15 +1,20 @@
+import json
+from datetime import datetime as dt
+
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Transfer
-from transfer.serializers import TransferSerializer
-from accounts.models import User
 from rest_framework import status
-from datetime import datetime as dt
+from transfer.serializers import TransferSerializer
+
+from accounts.models import User
+from transfer.models import Transfer
+
 
 # initializes the Client class to be used at the tests
 client = Client()
 
-class TransferMethodTests(TestCase):
+
+class TransferGetTests(TestCase):
 
     def setUp(self):
         self.u01 = User.objects.create(name='PyBr co.', cnpj=31415850000508)
@@ -53,6 +58,96 @@ class TransferMethodTests(TestCase):
             amount=4999.99,
         )
 
+    def test_get_all_transfers(self):
+        response = client.get(reverse('transfers:get_post_transfers'))
+        transfers = Transfer.objects.all()
+
+        serializer = TransferSerializer(transfers, many=True)
+
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_transfer(self):
+        response = client.get(reverse(
+            'transfers:get_put_delete_transfers', kwargs={'pk': 3}))
+        transfer = Transfer.objects.get(pk=3)
+        serializer = TransferSerializer(transfer)
+
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_not_get_transfer(self):
+        response = client.get(reverse(
+            'transfers:get_put_delete_transfers', kwargs={'pk': 12}))
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class TransferCreateTest(TestCase):
+
+    def setUp(self):
+        self.u01 = User.objects.create(name='PyBr co.', cnpj=31415850000508)
+        self.valid_transfer01 = {
+            "user_id": self.u01.id,
+            "payer_name": "paying user",
+            "payer_bank": 201,
+            "payer_agency": 3334,
+            "payer_account": 188003,
+            "beneficiary_name": "beneficiary user",
+            "beneficiary_bank": 100,
+            "beneficiary_agency": 8800,
+            "beneficiary_account": 201499,
+            "amount": 4999.99
+        }
+
+        self.invalid_transfer01 = {
+            "user_id": 'zz',
+            "payer_name": "paying user",
+            "payer_bank": 2201,
+            "payer_agency": 3334,
+            "payer_account": 188003,
+            "beneficiary_name": "beneficiary user",
+            "beneficiary_bank": 1,
+            "beneficiary_agency": 880033,
+            "beneficiary_account": 201499,
+            "amount": 4999.99
+        }
+
+    def test_create_transfer(self):
+        response = client.post(
+            reverse('transfers:get_post_transfers'),
+            data=json.dumps(self.valid_transfer01),
+            content_type='application/json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_error_create_transfer(self):
+        response = client.post(
+            reverse('transfers:get_post_transfers'),
+            data=json.dumps(self.invalid_transfer01),
+            content_type='application/json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class TransferMethodTests(TestCase):
+
+    def setUp(self):
+        self.u01 = User.objects.create(name='PyBr co.', cnpj=31415850000508)
+
+        self.t03 = Transfer.objects.create(
+            user_id=self.u01,
+            payer_name='Jonatan',
+            payer_bank=2,
+            payer_agency=3334,
+            payer_account=188003,
+            beneficiary_name='Benites',
+            beneficiary_bank=1,
+            beneficiary_agency=18800,
+            beneficiary_account=201499,
+            amount=5999.99,
+        )
+
     def test_transfer_type(self):
         self.t03.set_transfer_type()
 
@@ -84,15 +179,6 @@ class TransferMethodTests(TestCase):
         else:
             tstatus = 'OK'
         self.assertEqual(self.t03.status, tstatus)
-
-    def test_get_all_transfers(self):
-        response = client.get(reverse('transfers:transfers'))
-        transfers = Transfer.objects.all()
-
-        serializer = TransferSerializer(transfers, many=True)
-        a = serializer.data
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 
