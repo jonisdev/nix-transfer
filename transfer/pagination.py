@@ -18,8 +18,6 @@ class TransferPagination(pagination.PageNumberPagination):
                 'previous': self.get_previous_link()
             },
             'total_transfers': self.page.paginator.count,
-            # 'total_pages': self.page.paginator.count,
-            # 'total_transfers': len(self.total_transfers),
             'total_transfers_amount': self.total_tranfers_amount,
             'results': data
         })

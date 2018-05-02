@@ -65,16 +65,6 @@ class TransferGetTests(TestCase):
         )
 
     # GET
-    def test_get_all_transfers(self):
-        response = client.get(reverse('transfers:get_post_transfers'))
-        transfers = Transfer.objects.all()
-
-        serializer = TransferSerializer(transfers, many=True)
-
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    # GET
     def test_get_transfer(self):
         response = client.get(reverse(
             'transfers:get_put_delete_transfers', kwargs={'pk': 3}))

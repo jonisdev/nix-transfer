@@ -1,4 +1,4 @@
-Python 3.6.3 | Django 2.0.4
+Python 3.6.3 | Django 2.0.4 | Django Rest Framework 2.2.0
 
 ## Banco Nix Transferencias
 
@@ -22,3 +22,17 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 
 ```
+
+### Documentação 
+Para verificar os endpoints disponíveis, acesse http://localhost:8000/swagger/
+
+### Filtros
+Para filtrar é possível usar os seguintes filtros
+
+```
+http://127.0.0.1:8000/api/v1/transfers/?payer_name=Marie Curie
+http://127.0.0.1:8000/api/v1/transfers/?beneficiary_name=Marie Curie
+```
+É possivel usar também a Browseable API nativa do Django Rest Framework em:
+```http://127.0.0.1:8000/api/v1/transfers/```
+
