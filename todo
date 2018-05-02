@@ -1,0 +1,51 @@
+
+# TODO - READING:
+# TODO - Read about DRF Routes
+# TODO - Revise REST Best practices
+# TODO - Read about microservices
+# TODO - Read about logical exclusion
+
+
+# TODO - check that awesome project in Olist
+# OK - List site references
+# TODO - fix models str e repr
+# TODO - Maybe show Model information instead the user_id in serializarion
+# TODO - Implement User serialization.
+# TODO - Implement User tests
+# OK - Put version in api url /api/v1/ (REST Best practice?)
+# OK - Fix all return codes, for error and OKs: Not necessary, Classes already does it
+# OK - FIX status bug
+# OK - customize post, to avoid status and type insertion, using exclude for the serialize class
+
+# TODO - PROJECT REQUISITES
+# OK   - Implement filtered list to remove deleted results
+# OK   - Listagem com somatória e total de transferências
+# TODO - ---- filtros por data, pagador e beneficiário
+# OK   - ---- paginação
+# OK   - listagem por id
+# TODO - Documentation using swagger
+
+# TODO - IF TIME:
+# TODO - Revise write tests for the model
+
+# TODO - adjust timezone to get localtimezone
+
+
+# TODO - DOCUMENTATION
+# TODO - put some dummy cnpj's in the document for testing
+
+
+https://en.wikipedia.org/wiki/Class_diagram
+https://softwareengineering.stackexchange.com/questions/235313/uml-class-diagram-notations-differences-between-association-aggregation-and-co
+https://django-model-utils.readthedocs.io/en/latest/utilities.html#choices
+https://stackoverflow.com/questions/4269605/django-override-save-for-model
+https://stackoverflow.com/questions/18706098/django-access-given-fields-choices-tuple
+https://github.com/poliquin/brazilnum
+https://pypi.org/project/brazilnum/
+https://docs.djangoproject.com/en/2.0/ref/validators/
+https://docs.djangoproject.com/en/2.0/topics/db/models/
+https://www.linguee.com
+https://docs.python.org/3.6/library/datetime.html
+https://realpython.com/test-driven-development-of-a-django-restful-api/
+http://www.django-rest-framework.org/api-guide/pagination/#custom-pagination-styles
+

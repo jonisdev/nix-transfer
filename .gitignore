@@ -9,6 +9,7 @@ credentials.csv
 __pychache__/
 todo
 
+
 # Elastic Beanstalk Files
 .ebextensions/*
 !.ebextensions/*.config
