@@ -7,6 +7,7 @@ credentials.csv
 *.sublime-workspace
 .python-version
 __pychache__/
+todo
 
 # Elastic Beanstalk Files
 .ebextensions/*
