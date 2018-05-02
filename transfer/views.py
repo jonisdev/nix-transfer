@@ -40,14 +40,9 @@ class RetrieveUpdateDestroyTransfer(generics.RetrieveUpdateDestroyAPIView):
                 return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 class ListCreateUser(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    # Return empty list for get all transfers
-    # def list(self, request, *args, **kwargs):
-    #     return Response([OrderedDict()])
 
 
 class RetrieveUpdateDestroyUser(generics.RetrieveUpdateDestroyAPIView):
