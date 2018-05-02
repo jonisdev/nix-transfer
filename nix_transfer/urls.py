@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from transfer import urls as transfers_urls
+from rest_framework_swagger.views import get_swagger_view
+
+
+schema_view = get_swagger_view(title="NIX Transfers API Documentation")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(transfers_urls, namespace='transfers')),
+    path('swagger/', schema_view)
 ]

@@ -8,6 +8,7 @@ credentials.csv
 .python-version
 __pychache__/
 
+
 # Elastic Beanstalk Files
 .ebextensions/*
 !.ebextensions/*.config

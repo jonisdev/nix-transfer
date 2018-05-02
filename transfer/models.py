@@ -75,6 +75,22 @@ class Transfer(models.Model):
         choices=STATUS_CHOICES
     )
 
+    created_at = models.DateTimeField(
+        verbose_name='Criado em',
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        verbose_name='Criado em',
+        auto_now=True
+    )
+
+    deleted_at = models.DateTimeField(
+        verbose_name='Deletado em',
+        null=True,
+        blank=True,
+    )
+
     def set_transfer_type(self):
         current_datetime = dt.now()
         current_time = dt.time(current_datetime)

@@ -1,23 +1,35 @@
-# OK - customize post, to avoid status and type insertion, using exclude for the serialize class
-# OK - FIX status bug
 
+# TODO - READING:
 # TODO - Read about DRF Routes
-# TODO - Put version in api url /api/v1/ (REST Best practice?)
-# TODO - List site references
-# TODO - Fix all return codes, for error and OKs
-# TODO - RE write tests for the model
+# TODO - Revise REST Best practices
+# TODO - Read about microservices
+# TODO - Read about logical exclusion
+
+
 # TODO - check that awesome project in Olist
+# TODO - List site references
 # TODO - fix models str e repr
 # TODO - Maybe show Model information instead the user_id in serializarion
 # TODO - Implement User serialization.
-# TODO - Read about microservices
-# TODO - put some dummy cnpj's in the document.
+# TODO - Implement User tests
+# OK - Put version in api url /api/v1/ (REST Best practice?)
+# OK - Fix all return codes, for error and OKs: Not necessary, Classes already does it
+# OK - FIX status bug
+# OK - customize post, to avoid status and type insertion, using exclude for the serialize class
 
 # TODO - PROJECT REQUISITES
-# - listagem com somatória e total de transferências
-# ---- filtros por data, pagador e beneficiário
-# ---- paginação
-# ---- retornar a somatória e o total
-# listagem por id
-# TODO - Implement logical exclusion
+# OK   - Implement filtered list to remove deleted results
+# OK   - Listagem com somatória e total de transferências
+# TODO - ---- filtros por data, pagador e beneficiário
+# OK   - ---- paginação
+# OK   - listagem por id
+# TODO - Documentation using swagger
 
+# TODO - IF TIME:
+# TODO - Revise write tests for the model
+
+# TODO - adjust timezone to get localtimezone
+
+
+# TODO - DOCUMENTATION
+# TODO - put some dummy cnpj's in the document for testing

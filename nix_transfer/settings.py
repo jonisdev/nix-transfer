@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_swagger',
     'rest_framework',
+    'django_filters',
     'accounts',
     'transfer',
 ]
@@ -124,3 +126,15 @@ STATIC_URL = '/static/'
 
 # Authentication
 AUTH_USER_MODEL = 'accounts.User'
+
+# DRF Pagination
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+        'transfer.pagination.TransferPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
+
+}
+

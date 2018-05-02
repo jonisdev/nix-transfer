@@ -10,3 +10,4 @@ https://docs.djangoproject.com/en/2.0/topics/db/models/
 https://www.linguee.com
 https://docs.python.org/3.6/library/datetime.html
 https://realpython.com/test-driven-development-of-a-django-restful-api/
+http://www.django-rest-framework.org/api-guide/pagination/#custom-pagination-styles
