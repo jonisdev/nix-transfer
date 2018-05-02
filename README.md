@@ -19,12 +19,17 @@ $ source my_env/bin/activate
 
 $ pip install -r requirements.txt
 
+$ python manage.py test
+
 $ python manage.py runserver
 
 ```
 
 ### Documentação 
-Para verificar os endpoints disponíveis, acesse http://localhost:8000/swagger/
+Para verificar os endpoints disponíveis, acesse:
+```
+http://127.0.0.1:8000/swagger/
+```
 
 ### Filtros
 Para filtrar é possível usar os seguintes filtros
